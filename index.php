@@ -8,7 +8,7 @@ if (!is_dir('.')) {
 
 $files = array();
 foreach (scandir($directory) as $file) {
-	if ($file !== '.' && $file !== '..' && !is_dir($file) && $file !== 'index.php' && $file !== 'view_source.php') {
+	if ($file !== '.' && $file !== '..' && !is_dir($file) && $file !== 'index.php' && $file !== 'view_source.php' && $file !== 'common.inc.php') {
 		$files[] = $file;
 	}
 }
