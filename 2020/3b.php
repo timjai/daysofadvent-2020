@@ -1,6 +1,7 @@
 <?php
+include '../header.inc.php';
 
-$input = explode("\n", file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/inputs/3a.txt'));
+$input = explode("\n", file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/2020/inputs/3a.txt'));
 
 $currentPos = 0;
 $results = [];
@@ -46,3 +47,5 @@ print_r($results);
 echo '</pre>';
 
 echo 'Trees Hit: ' . $treesHit;
+
+include '../footer.inc.php';

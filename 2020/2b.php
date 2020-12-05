@@ -1,6 +1,7 @@
 <?php
+include '../header.inc.php';
 
-$input = file($_SERVER['DOCUMENT_ROOT'] . '/inputs/2a.txt', FILE_IGNORE_NEW_LINES);
+$input = file($_SERVER['DOCUMENT_ROOT'] . '/2020/inputs/2a.txt', FILE_IGNORE_NEW_LINES);
 $validPasswords = 0;
 foreach ($input as $expMe) {
 	list($parameters, $character, $splitPassword) = explode(' ', $expMe);
@@ -18,3 +19,5 @@ foreach ($input as $expMe) {
 }
 
 echo 'Valid: ' . $validPasswords;
+
+include '../footer.inc.php';

@@ -1,8 +1,8 @@
 <?php
 
-include 'common.inc.php';
+include '../header.inc.php';
 
-$input = explode("\n", file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/inputs/5a.txt'));
+$input = explode("\n", file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/2020/inputs/5a.txt'));
 
 function getRow($boardingPass)
 {
@@ -48,16 +48,31 @@ function getColumn($boardingPass)
 	return $currentLeft <= $currentRight ? $currentLeft : $currentRight;
 }
 
-$highest = 0;
+$planeMap = [];
 
 foreach ($input as $boardingPass) {
 	$row = (int)getRow($boardingPass);
 	$column = (int)getColumn($boardingPass);
 	$seatId = ($row * 8) + $column;
 
-	$highest = $seatId > $highest ? $seatId : $highest;
+	if (!array_key_exists($row, $planeMap)) {
+		$planeMap[$row] = [];
+	}
+
+	$planeMap[$row][$seatId] = $column;
 }
 
-echo '<pre>';
-print_r('Highest: ' . $highest);
-echo '</pre>';
+ksort($planeMap);
+
+// all went a bit tits up somewhere above
+foreach ($planeMap as $row => $seat) {
+	if (count($seat) === 6) {
+		echo '<pre>'; print_r('------ The missing seat should be here -----'); echo '</pre>';
+		ksort($seat);
+		echo '<pre>';
+		print_r($seat);
+		echo '</pre>';
+	}
+}
+
+include '../footer.inc.php';

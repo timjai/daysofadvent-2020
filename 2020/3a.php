@@ -1,6 +1,7 @@
 <?php
+include '../header.inc.php';
 
-$input = file($_SERVER['DOCUMENT_ROOT'] . '/inputs/3a.txt', FILE_IGNORE_NEW_LINES);
+$input = file($_SERVER['DOCUMENT_ROOT'] . '/2020/inputs/3a.txt', FILE_IGNORE_NEW_LINES);
 
 $currentPos = 0;
 $treesHit = 0;
@@ -26,3 +27,4 @@ foreach ($input as $k => $expMe) {
 }
 
 echo 'Trees Hit: ' . $treesHit;
+include '../footer.inc.php';

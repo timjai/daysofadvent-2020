@@ -1,6 +1,7 @@
 <?php
+include '../header.inc.php';
 
-$input = explode("\n\n", file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/inputs/4a.txt'));
+$input = explode("\n\n", file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/2020/inputs/4a.txt'));
 
 foreach ($input as $k => $v) {
 	$input[$k] = str_replace("\n", " ", $v);
@@ -66,3 +67,5 @@ foreach ($input as $passport) {
 }
 
 echo 'Valid Passports: ' . $validPassport;
+
+include '../footer.inc.php.inc.php';

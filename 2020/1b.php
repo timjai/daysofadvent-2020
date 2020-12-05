@@ -1,6 +1,7 @@
 <?php
+include '../header.inc.php';
 
-$input = file($_SERVER['DOCUMENT_ROOT'] . '/inputs/1a.txt', FILE_IGNORE_NEW_LINES);
+$input = file($_SERVER['DOCUMENT_ROOT'] . '/2020/inputs/1a.txt', FILE_IGNORE_NEW_LINES);
 
 $iteration = 0;
 
@@ -19,3 +20,6 @@ foreach ($input as $int) {
 		}
 	}
 }
+
+include '../footer.inc.php';
+

@@ -1,23 +1,43 @@
 <?php
 
+include 'header.inc.php';
+
 $directory = '.';
 
 if (!is_dir('.')) {
 	exit('Invalid directory path');
 }
 
-$files = array();
-foreach (scandir($directory) as $file) {
-	if ($file !== '.' && $file !== '..' && !is_dir($file) && $file !== 'index.php' && $file !== 'view_source.php' && $file !== 'common.inc.php') {
-		$files[] = $file;
+$years = [];
+foreach (scandir($directory) as $year) {
+	if ($year !== '.' && $year !== '..' && $year !== '.git' && is_dir($year)) {
+
+		foreach (scandir($directory . '/' . $year) as $file) {
+			if ($file !== '.' && $file !== '..' && !is_dir($year . '/' . $file) && $file !== 'index.php' && $file !== 'view_source.php' && $file !== 'common.inc.php') {
+				$years[$year][] = $file;
+			}
+		}
 	}
 }
 
-if (!empty($files)) {
-	echo '<ul>';
-	foreach ($files as $file) {
-		echo '<li><a href="'.$file.'">'.$file.'</a> [<a href="view_source.php?f='.$file.'">s</a>]</li>';
+if (!empty($years)) {
+	echo '<div class="row">';
+	foreach ($years as $year => $files) {
+		echo '<div class="col">';
+
+		echo '<h2>' . $year . '</h2>';
+		echo '<ul>';
+		foreach ($files as $file) {
+			echo '<li><a href="' . $year . '/' . $file . '">' . $file . '</a> [<a href="view_source.php?f=' . $year . '/' . $file . '">s</a>]</li>';
+		}
+		echo '</ul>';
+		echo '</div>';
 	}
-	echo '</ul>';
+	echo '</div>';
+
 }
+
+include 'footer.inc.php';
+
 ?>
+
