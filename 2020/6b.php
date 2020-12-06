@@ -8,53 +8,28 @@ $total = 0;
 $rewriteAllThis = [];
 foreach ($input as $questionsAnswered)
 {
-	$responses = explode("\n", $questionsAnswered);
-	$chars = [];
-	$persons = [];
-	foreach ($responses as $personsResponse)
+	$chars = array_keys(array_count_values(str_split(str_replace("\n", "", $questionsAnswered))));
+	$persons = explode("\n", $questionsAnswered);
+
+	$groupTotal = 0;
+	foreach ($chars as $char)
 	{
-		$chars = array_merge($chars, str_split($personsResponse));
-		$persons[] = $personsResponse;
-	}
-
-	$chars = array_unique($chars);
-	$total = 0;
-	foreach($chars as $char) {
-		$hasChar = true;
-		foreach($persons as $person) {
-
-			if (!in_array($char, str_split($person))) {
-				$hasChar = false;
+		foreach ($persons as $person)
+		{
+			if (!preg_match('/' . $char . '/', $person))
+			{
+				continue 2;
 			}
-}
-		if ($hasChar) {
-			$total++;
 		}
+
+		$groupTotal++;
 	}
 
-	$rewriteAllThis[] = $total;
+	$total += $groupTotal;
 }
 
 echo '<pre>';
-print_r('What is the sum of those counts?: ' . array_sum($rewriteAllThis));
+print_r('What is the sum of those counts?: ' . $total);
 echo '</pre>';
 
 include '../footer.inc.php';
-
-
-/*
- * 	$responses = explode("\n", $questionsAnswered);
-	foreach($responses as $personsResponse) {
-
-		$answers = array_unique(array_keys(array_count_values(str_split($personsResponse))));
-		foreach ($answers as $answer) {
-			$toSum[$answer] = chr($answer);
-		}
-		echo '<pre>'; debug($answers); echo '</pre>';
-	}
-	$split = str_split($questionsAnswered);
-//	echo '<pre>'; debug($questionsAnswered); echo '</pre>'; die();
-	$total +=count(array_count_values($split));
-
-	die();
- */
