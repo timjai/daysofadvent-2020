@@ -23,6 +23,8 @@ foreach (scandir($directory) as $year) {
 if (!empty($years)) {
 	echo '<div class="row">';
 	foreach ($years as $year => $files) {
+		natsort($files);
+
 		echo '<div class="col">';
 
 		echo '<h2>' . $year . '</h2>';
